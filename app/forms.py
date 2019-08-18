@@ -3,7 +3,7 @@
 
 from __init__ import app, g, csrf
 
-from models import User, Dayrate, Rate, Category, Tag
+from models import User, Dayrate, Rate, Category, Tag, Hourlyrate
 
 import datetime, wtforms
 from datetime import datetime

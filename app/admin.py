@@ -65,35 +65,6 @@ class UserModelView(ModelView):
 		return super(UserModelView, self).on_model_change(form, model, is_created)
 
 
-#
-'''
-class RateModelView(ModelView):
-
-	column_filters = ('email', 'username', 'active', 'admin')
-	column_list = ['uid', 'email','username', 'firstname','lastname', 'active', 'admin', 'created_timestamp']
-	column_searchable_list = ['email', 'username', 'firstname', 'lastname']
-	form_columns = ['email', 'username', 'firstname', 'lastname', 'password', 'admin', 'active']
-	form_extra_fields = {'password': PasswordField('New password'),}
-	def on_model_change(self, form, model, is_created):
-		if form.password.data:
-			model.password_hash = User.make_password(form.password.data)
-		return super(UserModelView, self).on_model_change(form, model, is_created)
-
-
-
-class DayRateModelView(ModelView):
-
-	column_filters = ('email', 'username', 'active', 'admin')
-	column_list = ['uid', 'email','username', 'firstname','lastname', 'active', 'admin', 'created_timestamp']
-	column_searchable_list = ['email', 'username', 'firstname', 'lastname']
-	form_columns = ['email', 'username', 'firstname', 'lastname', 'password', 'admin', 'active']
-	form_extra_fields = {'password': PasswordField('New password'),}
-	def on_model_change(self, form, model, is_created):
-		if form.password.data:
-			model.password_hash = User.make_password(form.password.data)
-		return super(UserModelView, self).on_model_change(form, model, is_created)
-
-'''
 
 
 
@@ -111,12 +82,12 @@ class IndexView(AdminIndexView):
 		return self.render('admin/index.html')
 
 admin.add_view( DayrateModelView(Dayrate, db.session))
-
 admin.add_view( CategoryModelView(Category, db.session))
-
-#admin.add_view( TagModelView(Tag, db.session))
-
 admin.add_view(UserModelView(User, db.session))
+admin.add_view(ModelView(Hourlyrate, db.session))
+admin.add_view(ModelView(Tag, db.session))
+admin.add_view(ModelView(Rate, db.session))
+admin.add_view(ModelView(Offence, db.session))
 
-#admin.add_view(BlogFileAdmin(app.config['STATIC_DIR'], '/static/', name='StaticFiles'))
+#admin.add_view(FileAdmin(app.config['STATIC_DIR'], '/static/', name='StaticFiles'))
 

@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% block extra_styles%}
+<style>
+    td {
+        background-color: antiquewhite;
+    }
+    
+    td,th{
+        padding-right: 20px;
+        padding-top: 5px;
+        padding-bottom: 5px;
+        border-left: 1px;
+        border-style: solid;
+
+    }
+    table {
+        margin-bottom: 50px;
+    }
+
+</style>
+{% endblock %}
+{% block content %}
+<div class="card w-full bg-grey-light">
+    <table>
+        <thead>
+            <tr class="border border-grey-darker text-sm text-grey-darker p-2">
+                <th>No.</th>
+                <th>Offence</th>
+                <th>1st. Sheduled Offences</th>
+                <th>2st. Sheduled Offences</th>
+                <th>3st. Sheduled Offences</th>
+                <th>4st. Sheduled Offences</th>
+
+            </tr>
+
+        </thead>
+        <tbody>
+            {% for item in offences_ %}
+            <tr class="border border-grey-darker text-sm text-grey-darker p-2">
+                <td class="txd">{{ item.id }}</td>
+                <td>{{ item.offence_type }}</td>
+                <td>{{ item.first_offence }}</td>
+                <td>{{ item.second_offence }}</td>
+                <td>{{ item.third_offence }}</td>
+                <td>{{ item.fourth_offence }}</td>
+            </tr>
+            {% endfor%}
+        </tbody>
+    </table>
+</div>
+
+
+{% endblock %}

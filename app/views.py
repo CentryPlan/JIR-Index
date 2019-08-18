@@ -4,8 +4,10 @@ import os, datetime
 from flask import redirect, render_template, request, url_for, flash, json
 from flask_classful import FlaskView, route
 from werkzeug import secure_filename
-from models import Dayrate, Rate, Category, Tag
+
+from models import Dayrate, Hourlyrate, Rate, Category, Tag, Offence
 from forms import DayrateForm, RateForm, TagForm, CategoryForm
+from tables import dayrate_table, user_table
 
 from __init__ import app,db
 
@@ -17,18 +19,33 @@ def home():
     )
 
 
+# GUIDELINES AND RULES
+class GuideView(FlaskView):
+        def guidelines(self):
+                return render_template('guideline.html',
+                title='Industrial Council Guidelines')
+
+        @route('/offences')
+        def offence(self):
+                return render_template('offences.html',
+                title = 'Diciplinary Guidelines',
+                offences_ = Offence.query.all()
+                )
+
+
+
 # INDUSTRIAL RATES INDEX 
 class RateView(FlaskView):
         def index(self):
-                return render_template('rate_index.html',
-                        title='Industrial Rates Category',
+                return render_template('index.html',
+                        title='Industrial Rates Index',
                         form = CategoryForm(),
                         dr_form=DayrateForm(),
                         r_form=RateForm(),
                         t_form=TagForm(),
-                        dayrates=DayRate.query.all(),
+                        dayrates=Dayrate.query.all(),
                         rates=Rate.query.all(),
-                        ratecategory=Ratecategory.query.all(),
+                        ratecategory=Category.query.all(),
                         tags=Tag.query.all())
 
                     
@@ -94,8 +111,21 @@ class RateView(FlaskView):
                 return redirect(url_for('RateView:index'))
 
 
+        @route('dayrate')
+        def dayrate(self):
+                return render_template('dayrate_index.html',
+                        title='Industrial Rates Index',
+                        hr_form = Hourlyrate.query.all(),
+                        dr_form=DayrateForm(),
+                        dayrates=Dayrate.query.all(),
+                        table=dayrate_table,
+                        usertable = user_table
+                        )
+
+
 
 
 
 # REGISTER VIEWS
+GuideView.register(app)
 RateView.register(app)

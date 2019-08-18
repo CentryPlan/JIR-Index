@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block extra_styles%}
+<style>
+    td {
+        background-color: antiquewhite;
+    }
+    
+    td,th{
+        padding-right: 20px;
+        padding-top: 5px;
+        padding-bottom: 5px;
+        border-left: 1px;
+        border-style: solid;
+
+    }
+    table {
+        margin-bottom: 50px;
+    }
+
+</style>
+{% endblock %}
+{% block content %}
+<div class="card flex flex-row w-full bg-grey-light">
+    <div class="flex flex-col w-1/4">{{ table }}</div>
+    <div class="flex flex-col w-1/2">{{ usertable }}</div>
+    <div class="flex flex-col w-1/4">News</div>
+</div>
+
+
+{% endblock %}

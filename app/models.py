@@ -3,11 +3,11 @@ import datetime
 import re
 import genny
 import math
-#import application
+
 #from flask import current_app
 
 
-from __init__ import db, g
+from __init__ import db, bcrypt, g
 #current_app(application)
 
 # UTILITIES
@@ -90,10 +90,10 @@ class User(db.Model):
         return self.id
 
     def get_uid(self):
-        self.uid = genny.nameid(self.firstname,self.lastname)
+        self.uid = genny.nameid(self.firstname, self.lastname)
 
     def is_authenticated(self):
-        return True
+        return False
 
     def is_active(self):
         return self.active
@@ -182,6 +182,7 @@ class Offence(db.Model):
     first_offence = db.Column(db.String(64))
     second_offence = db.Column(db.String(64))
     third_offence = db.Column(db.String(64))
+    fourth_offence = db.Column(db.String(64))
 
 
     def __init__(self, *args, **kwargs):
@@ -232,7 +233,7 @@ class Hourlyrate(db.Model):
     l3_rate = db.Column(db.Float())
 
     def __init__(self, *args, **kwargs):
-        super(Hourate, self).__init__(*args, **kwargs)
+        super(Hourlyrate, self).__init__(*args, **kwargs)
        
 
     def __repr__(self):
@@ -249,7 +250,7 @@ class Dayrate(db.Model):
 
 
     def __init__(self, *args, **kwargs):
-        super(DayRate, self).__init__(*args, **kwargs)
+        super(Dayrate, self).__init__(*args, **kwargs)
         self.get_id()        
 
     def get_id(self):
@@ -257,7 +258,7 @@ class Dayrate(db.Model):
             return self.id
 
     def __repr__(self):
-        return f'<Day Rate: {self.name}'
+        return f'<Day Rate: {self.category}'
 
 
 

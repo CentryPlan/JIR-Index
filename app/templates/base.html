@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Jamaica Rates Index</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='tailwindcss/tailwindcss/dist/tailwind.min.css')}}">
+    {% block extra_styles %} {% endblock %}
+    <script src="{{ url_for('static', filename='vue/vue.js') }}"></script>
+    {% block extra_scripts %}{% endblock %}
+    
+</head>
+<body>
+    
+</body>
+<div class="container w-full">
+    <nav class="flex items-center justify-between bg-grey-light p-4">
+        <div class="flex items-center flex-no-shrink text-white mr-4">
+            <a href="{{ url_for('static', filename='imgs/logo.png') }}"><img src="{{ url_for('static', filename='imgs/logo.png') }}" width="80px" height="50px"></a>
+            <span class="font-semibold text-md tracking-tight">{{ title }}</span>
+        </div>
+    </nav>
+    <div class="flex flex-row flex-wrap">
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+        <ul class="text-teal bg-yellow-light p-2 border flashes">
+            {% for message in messages %}
+            <li> {{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+        {% endwith %}
+    </div>
+
+    {% block content %}{% endblock %}
+</div>
+</html>
